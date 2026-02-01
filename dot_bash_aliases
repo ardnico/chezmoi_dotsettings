@@ -1,0 +1,168 @@
+# Common aliases for interactive shells
+# - Keep it POSIX-ish as much as possible
+# - Avoid breaking scripts (only interactive shells)
+# - Don't create dangerous "rm -rf" shortcuts
+
+# Only for interactive shells
+[ -z "${PS1-}" ] && return
+
+# -----------------------------
+# Basic ls
+# -----------------------------
+if ls --color=auto >/dev/null 2>&1; then
+  alias ls='ls --color=auto --group-directories-first'
+else
+  alias ls='ls'
+fi
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias lt='ls -aF --group-directories-first'
+alias lsz='ls -lh'
+alias lszs='ls -lhS'
+
+# -----------------------------
+# Safer file ops (lightweight)
+# -----------------------------
+alias cp='cp -i'
+alias mv='mv -i'
+# "safe deletes" as optional commands (do not override rm globally)
+alias rmi='rm -i'
+alias rmd='rm -rI'   # confirm once when removing many files/dirs (GNU rm)
+
+# -----------------------------
+# Navigation
+# -----------------------------
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias c='cd'
+alias pd='pushd'
+alias po='popd'
+
+# -----------------------------
+# grep / less / find
+# -----------------------------
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias less='less -R'
+
+alias f='find . -name'
+alias fd='find . -type d -name'
+alias ff='find . -type f -name'
+
+# Recursive grep templates (exclude common heavy dirs)
+alias gr='grep -RIn --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=target'
+alias grc='grep -RIn --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=target --include="*.c" --include="*.h"'
+alias grs='grep -RIn --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=target --include="*.sh"'
+
+# -----------------------------
+# History / env / introspection
+# -----------------------------
+alias h='history'
+alias h10='history 10'
+alias hg='history | grep'
+alias envg='env | grep -i'
+alias path='printf "%s\n" "${PATH//:/\n}"'
+
+# which -> type -a is more truthful in shells
+alias which='type -a'
+
+# -----------------------------
+# Disk / memory
+# -----------------------------
+alias dfi='df -hT'
+alias duh='du -sh .'
+alias dus='du -sh * 2>/dev/null | sort -h'
+alias meminfo='free -h'
+
+# -----------------------------
+# Process
+# -----------------------------
+alias psx='ps auxf'
+alias psg='ps aux | grep -v grep | grep -i'
+
+# -----------------------------
+# Network
+# -----------------------------
+alias ipa='ip -4 addr'
+alias ipr='ip route'
+alias ports='ss -lntup'
+alias p='ping'
+alias p4='ping -4'
+alias p6='ping -6'
+
+# DNS tools (存在する場合だけ使う想定)
+alias digg='dig +short'
+alias dns='cat /etc/resolv.conf'
+
+# -----------------------------
+# systemd / journalctl
+# -----------------------------
+alias sc='systemctl'
+alias scu='systemctl --user'
+alias scs='systemctl status'
+alias scr='systemctl restart'
+alias scstart='systemctl start'
+alias scstop='systemctl stop'
+alias sce='systemctl enable'
+alias scd='systemctl disable'
+
+alias j='journalctl'
+alias jn='journalctl -n 100'
+alias jfn='journalctl -f -n 50'
+alias jfu='journalctl -f -u'  # usage: jfu nginx.service
+
+# -----------------------------
+# Git (light common set)
+# -----------------------------
+alias g='git'
+alias gs='git status -sb'
+alias ga='git add'
+alias gap='git add -p'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gca='git commit --amend'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gb='git branch'
+alias gl='git log --oneline --graph --decorate'
+alias gll='git log --graph --decorate --all --oneline'
+alias gd='git diff'
+alias gp='git pull'
+alias gP='git push'
+alias gpt='git push --tags'
+
+# -----------------------------
+# Docker (if installed)
+# -----------------------------
+alias d='docker'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias di='docker images'
+alias dlog='docker logs'
+alias dlogf='docker logs -f'
+alias drm='docker rm'
+alias drmi='docker rmi'
+alias dex='docker exec -it'
+alias dstats='docker stats'
+
+# docker compose v2
+alias dc='docker compose'
+alias dcu='docker compose up'
+alias dcud='docker compose up -d'
+alias dcd='docker compose down'
+alias dcl='docker compose logs'
+alias dclf='docker compose logs -f'
+alias dcr='docker compose restart'
+
+# tmux
+alias tnew='tmux new -s'
+alias tat='tmux attach -t'
+alias tnewd='tmux new -s default'
+alias tatd='tmux attach -t default'
+
+
+
+

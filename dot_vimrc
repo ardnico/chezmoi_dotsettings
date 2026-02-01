@@ -1,0 +1,45 @@
+" /etc/skel/.vimrc
+" Minimal, sane defaults for server environments (UTF-8, indent, usability)
+
+set nocompatible
+set encoding=utf-8
+scriptencoding utf-8
+
+" UI / usability
+set number
+set ruler
+set showcmd
+set nowrap
+set backspace=indent,eol,start
+set mouse=
+
+" Search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+" Indent (safe default: 4 spaces)
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+set smartindent
+
+" Files / backup behavior (avoid littering)
+set nobackup
+set nowritebackup
+set noswapfile
+set undofile
+if has('persistent_undo')
+  set undodir=~/.vim/undo//
+endif
+
+" Display
+syntax on
+set t_Co=256
+
+" Quality-of-life
+set clipboard=
+

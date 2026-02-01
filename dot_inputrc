@@ -1,0 +1,19 @@
+# Readline defaults (Bash, many CLI tools)
+
+set completion-ignore-case on
+set show-all-if-unmodified on
+set menu-complete-display-prefix on
+
+# Make Tab completion more friendly
+TAB: menu-complete
+
+# Incremental history search with up/down arrows
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Better word movement in many terminals
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+
+# If your terminal sends different sequences, users can override locally
+
